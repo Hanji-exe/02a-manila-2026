@@ -139,10 +139,23 @@ export function HeroPage() {
 
       {/* Background Layer */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none">
-        {/* Main Atmospheric Glows */}
-        <div className="absolute top-[-10%] right-[-10%] w-[60%] h-[60%] opacity-20 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.4)_0%,transparent_70%)] blur-[100px]" />
-        <div className="absolute bottom-[0%] left-[-10%] w-[50%] h-[50%] opacity-10 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.3)_0%,transparent_70%)] blur-[80px]" />
-        <div className="absolute top-[20%] left-[20%] w-[30%] h-[30%] opacity-5 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.2)_0%,transparent_70%)] blur-[60px]" />
+        {/* Large Elliptical Glow — top specific for this section */}
+        <div
+          className="absolute top-[-20%] left-[-10%] w-[120%] h-[140%] opacity-30 rotate-12"
+          style={{ background: 'radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.15) 0%, transparent 70%)' }}
+        />
+
+        {/* Large Decorative Wireframe Triangles */}
+        <div className="absolute inset-0 opacity-[0.05]">
+          <div 
+            className="absolute top-1/4 left-1/4 w-[400px] h-[400px] border border-white/20 rotate-[15deg]"
+            style={{ clipPath: 'polygon(50% 0%, 0% 100%, 100% 100%)' }}
+          />
+          <div 
+            className="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] border border-white/10 -rotate-[12deg]"
+            style={{ clipPath: 'polygon(50% 0%, 0% 100%, 100% 100%)' }}
+          />
+        </div>
 
         <div className="absolute top-[-20%] left-[-10%] w-[120%] h-[140%] opacity-30 rotate-12">
           <div
@@ -189,21 +202,20 @@ export function HeroPage() {
         <div
           className="flex flex-col items-start transition-transform duration-300 ease-out flex-1"
         >
-          {/* Top Logos */}
+          {/* Top Branding Cluster */}
           <div
             className={cn(
-              "mt-4 mb-8 flex items-center gap-8 transition-all duration-1000 delay-200",
+              "mt-4 mb-8 flex items-center transition-all duration-1000 delay-200",
               isVisible
                 ? "opacity-100 translate-y-0"
                 : "opacity-0 translate-y-4",
             )}
           >
-            <img
-              src="/vercel-icon.svg"
-              alt="Vercel"
-              className="w-10 h-10 invert"
+            {/* The Unified Brand Triangle */}
+            <div 
+              className="w-10 h-10 bg-white shadow-[0_0_25px_rgba(255,255,255,0.4)]"
+              style={{ clipPath: 'polygon(50% 0%, 0% 100%, 100% 100%)' }}
             />
-            <img src="/v0-icon.svg" alt="v0" className="w-12 h-auto invert" />
           </div>
 
           <div
@@ -214,8 +226,10 @@ export function HeroPage() {
                 : "opacity-0 -translate-x-8",
             )}
           >
-            <p className="text-xl md:text-2xl tracking-tight uppercase">
-              02A<span className="text-white/20">/</span>GLOBAL BUILD WEEK
+            <p className="text-xl md:text-2xl tracking-tight uppercase flex items-center gap-4">
+              <span style={{ color: 'var(--color-brand-red)' }}>02A</span>
+              <span className="text-white/20">/</span>
+              <span>GLOBAL BUILD WEEK</span>
             </p>
           </div>
 
@@ -264,24 +278,30 @@ export function HeroPage() {
                 : "opacity-0 translate-y-8",
             )}
           >
-            {/* Glassmorphic Shimmer CTA Button */}
+            {/* Glassmorphic Shimmer CTA Button with RGB Accent */}
             <a
               href="https://luma.com/bho2efmh?utm_id=97758_v0_s00_e0_tv0&fbclid=IwY2xjawRQFHxleHRuA2FlbQIxMQBzcnRjBmFwcF9pZAEwAAEeBYtzdx3cSoyVWB67R5ocjH8vVv2zuhGntHEy_f1jJMFCiPud5G2LHo4gom4_aem_FYXDh08gPP2NqtKIYgjSyw"
               target="_blank"
               rel="noopener noreferrer"
-              className="group relative inline-block px-10 py-5 bg-white/10 text-white font-black text-xs tracking-[0.3em] uppercase rounded-full border border-white/20 backdrop-blur-xl overflow-hidden transition-all duration-300 hover:scale-105 hover:bg-white/20 hover:border-white/40 hover:shadow-[0_0_40px_rgba(255,255,255,0.15)] no-underline"
+              className="group relative inline-block px-12 py-5 bg-white/5 text-white font-black text-[11px] tracking-[0.4em] uppercase rounded-sm border border-white/10 backdrop-blur-xl overflow-hidden transition-all duration-500 hover:scale-105 hover:bg-white/10 no-underline"
             >
-              {/* Button Shimmer Effect */}
-              <div className="absolute inset-0 w-full h-full bg-linear-to-r from-transparent via-white/20 to-transparent -translate-x-full animate-[shimmer_2s_infinite] pointer-events-none" />
+              {/* RGB Hover Glow */}
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none">
+                <div className="absolute inset-0 bg-gradient-to-r from-brand-red/20 via-brand-green/20 to-brand-blue/20 blur-xl" />
+                <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-brand-red via-brand-green to-brand-blue" />
+                <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-brand-blue via-brand-green to-brand-red" />
+              </div>
 
-              {/* Button Hover Aura */}
-              <div
-                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
-                style={{
-                  background: `radial-gradient(circle 80px at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.1), transparent)`,
-                }}
-              />
+              {/* Button Shimmer Effect */}
+              <div className="absolute inset-0 w-full h-full bg-linear-to-r from-transparent via-white/10 to-transparent -translate-x-full animate-[shimmer_2s_infinite] pointer-events-none" />
+
               <span className="relative z-10">REGISTER NOW</span>
+              
+              {/* Small accent triangle */}
+              <div 
+                className="absolute top-1 right-1 w-2 h-2 bg-white/20"
+                style={{ clipPath: 'polygon(50% 0%, 0% 100%, 100% 100%)' }}
+              />
             </a>
 
             <div className="flex flex-col items-start gap-4">
@@ -356,31 +376,37 @@ export function HeroPage() {
                   />
                 ))}
 
-                {/* Central Glowing Seed (Triangular Prism) */}
+                {/* Central Glowing Seed (Triangular Prism with RGB refraction candidate) */}
                 <div
                   className={cn(
                     "absolute inset-0 flex items-center justify-center transition-all duration-500",
                     isPulsing ? "scale-150" : "scale-100",
                   )}
                 >
+                  {/* RGB Refractive Aura */}
+                  <div className="absolute inset-[-20px] opacity-40 blur-2xl animate-pulse">
+                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-brand-red opacity-30" style={{ clipPath: 'polygon(50% 0%, 0% 100%, 100% 100%)' }} />
+                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-brand-green opacity-30 rotate-[120deg]" style={{ clipPath: 'polygon(50% 0%, 0% 100%, 100% 100%)' }} />
+                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-brand-blue opacity-30 rotate-[240deg]" style={{ clipPath: 'polygon(50% 0%, 0% 100%, 100% 100%)' }} />
+                  </div>
+
                   {/* Glow Backdrop */}
                   <div
                     className="w-16 h-16 bg-white opacity-40 blur-xl animate-pulse"
                     style={{ clipPath: "polygon(50% 0%, 0% 100%, 100% 100%)" }}
                   />
-                  {/* The Prism Core */}
+                  {/* The Prism Core with subtle RGB edges */}
                   <div
-                    className="absolute w-8 h-8 bg-white shadow-[0_0_30px_white]"
+                    className="absolute w-10 h-10 bg-white shadow-[0_0_30px_rgba(255,255,255,0.5)] flex items-center justify-center"
                     style={{
                       clipPath: "polygon(50% 0%, 0% 100%, 100% 100%)",
-                      background: "linear-gradient(135deg, #fff 0%, #aaa 100%)",
+                      background: "linear-gradient(135deg, #fff 0%, #eee 100%)",
                     }}
-                  />
-                  {/* Inner Refraction Line */}
-                  <div
-                    className="absolute w-px h-6 bg-black/20"
-                    style={{ transform: "translateX(-2px) rotate(-15deg)" }}
-                  />
+                  >
+                    {/* Inner RGB "Chromatic Aberration" look */}
+                    <div className="absolute inset-0 bg-brand-red/10 -translate-x-px translate-y-px" style={{ clipPath: "polygon(50% 0%, 0% 100%, 100% 100%)" }} />
+                    <div className="absolute inset-0 bg-brand-blue/10 translate-x-px -translate-y-px" style={{ clipPath: "polygon(50% 0%, 0% 100%, 100% 100%)" }} />
+                  </div>
                 </div>
               </div>
             </div>
@@ -399,7 +425,7 @@ export function HeroPage() {
         </div>
       </div>
 
-      {/* Bottom Scroll Indicator */}
+      {/* Bottom Scroll Indicator with RGB line */}
       <div
         className={cn(
           "absolute bottom-10 left-1/2 -translate-x-1/2 transition-all duration-1000 delay-[1200ms]",
@@ -410,7 +436,7 @@ export function HeroPage() {
           <span className="text-[9px] font-mono text-white/30 tracking-[0.4em] uppercase">
             Scroll to Initialize
           </span>
-          <div className="w-px h-12 bg-linear-to-b from-white/40 to-transparent" />
+          <div className="w-px h-12 bg-[linear-gradient(to_bottom,var(--brand-red),var(--brand-green),var(--brand-blue),transparent)]" />
         </div>
       </div>
     </section>

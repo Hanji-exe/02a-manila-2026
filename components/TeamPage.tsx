@@ -215,10 +215,11 @@ function TeamCard({ member, isLarge = false }: { member: TeamMember; isLarge?: b
 // ─── MAIN COMPONENT ─────────────────────────────────────────────
 export function TeamPage() {
   return (
-    <Section id="team" className="relative border-b border-border/50 overflow-hidden">
-      {/* Background atmospheric glows */}
-      <div className="absolute top-[20%] right-[-10%] w-[40%] h-[40%] opacity-5 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.3)_0%,transparent_70%)] blur-[100px] pointer-events-none" />
-      <div className="absolute bottom-[10%] left-[-10%] w-[30%] h-[30%] opacity-5 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.2)_0%,transparent_70%)] blur-[80px] pointer-events-none" />
+    <Section id="team" className="relative overflow-hidden">
+      {/* RGB Atmospheric Glows */}
+      <div className="absolute top-[10%] right-[-10%] w-[50%] h-[50%] opacity-20 bg-[radial-gradient(circle_at_center,var(--color-brand-green),transparent_70%)] blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-[10%] left-[-10%] w-[40%] h-[40%] opacity-15 bg-[radial-gradient(circle_at_center,var(--color-brand-blue),transparent_70%)] blur-[100px] pointer-events-none" />
+      <div className="absolute top-[50%] left-[40%] w-[30%] h-[30%] opacity-10 bg-[radial-gradient(circle_at_center,var(--color-brand-red),transparent_70%)] blur-[100px] pointer-events-none" />
 
       <ScrollObserver>
         {/* ── ORGANIZING TEAM ── */}

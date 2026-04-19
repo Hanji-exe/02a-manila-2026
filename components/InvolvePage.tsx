@@ -31,9 +31,7 @@ const involvementOptions = [
 
 export function InvolvePage() {
   return (
-    <Section id="get-involved" className="relative bg-black border-b border-border/50 overflow-hidden">
-      {/* Background atmospheric glows */}
-      <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] opacity-5 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.3)_0%,transparent_70%)] blur-[100px] pointer-events-none" />
+    <Section id="get-involved" className="relative overflow-hidden">
 
       <ScrollObserver>
         <div className="mb-16 text-center">
@@ -49,7 +47,7 @@ export function InvolvePage() {
           <div className="flex items-center justify-center gap-4 mt-4">
             <div className="h-px w-12 bg-white/10" />
             <span className="text-[10px] font-mono text-white/40 tracking-[0.4em] uppercase">
-              Operational Roles
+              JOIN THE MISSION 
             </span>
             <div className="h-px w-12 bg-white/10" />
           </div>
@@ -59,7 +57,7 @@ export function InvolvePage() {
           {involvementOptions.map((option) => (
             <div
               key={option.title}
-              className="group relative p-8 bg-[#0a0a0a] border border-white/5 rounded-sm transition-all hover:bg-white/[0.03] hover:border-white/20 flex flex-col h-full overflow-hidden"
+              className="group relative p-8 bg-white/[0.02] border border-white/5 rounded-sm transition-all hover:bg-white/[0.05] hover:border-white/20 flex flex-col h-full overflow-hidden"
             >
               {/* Corner HUD Ornaments */}
               <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-white/20 group-hover:border-white/40 transition-colors" />
@@ -78,6 +76,7 @@ export function InvolvePage() {
           ))}
         </div>
 
+        {/* CTA Register Section — dark, original style */}
         <div className="text-center space-y-12 py-16 border-t border-white/5">
           <div className="max-w-3xl mx-auto space-y-4">
             <div className="text-[10px] font-mono text-white/30 tracking-[0.5em] uppercase">
@@ -90,7 +89,6 @@ export function InvolvePage() {
           </div>
 
           <div className="flex justify-center">
-            {/* Glassmorphic Shimmer CTA Button to match Hero */}
             <button
               onClick={() =>
                 window.open(
@@ -98,15 +96,12 @@ export function InvolvePage() {
                   "_blank",
                 )
               }
-              className="group relative inline-block px-12 py-6 bg-white/10 text-white font-black text-xs tracking-[0.3em] uppercase rounded-full border border-white/20 backdrop-blur-xl overflow-hidden transition-all duration-300 hover:scale-105 hover:bg-white/20 hover:border-white/40 hover:shadow-[0_0_50px_rgba(255,255,255,0.1)] no-underline cursor-pointer"
+              className="group relative inline-flex items-center gap-4 px-12 py-5 bg-white text-black font-mono font-bold text-[11px] tracking-[0.4em] uppercase rounded-sm overflow-hidden transition-all duration-300 hover:bg-white/90 hover:scale-[1.03] cursor-pointer"
             >
-              {/* Button Shimmer Effect */}
-              <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-[shimmer_2s_infinite] pointer-events-none" />
-              
-              <span className="relative z-10 flex items-center gap-3">
-                REGISTER NOW
-                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-              </span>
+              {/* Shimmer */}
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-black/5 to-transparent -translate-x-full group-hover:animate-[shimmer_2s_infinite] pointer-events-none" />
+              <span className="relative z-10">REGISTER NOW</span>
+              <ArrowRight className="relative z-10 w-4 h-4 transition-transform group-hover:translate-x-1" />
             </button>
           </div>
         </div>

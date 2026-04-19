@@ -125,7 +125,13 @@ export function EventPage() {
     );
 
   return (
-    <Section id="event-details" className="border-b border-border/50">
+    <Section id="event-details" className="relative overflow-hidden">
+      {/* RGB Atmospheric Glows */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none">
+        <div className="absolute top-[-5%] left-[-5%] w-[50%] h-[50%] opacity-20 bg-[radial-gradient(circle_at_center,var(--color-brand-blue),transparent_70%)] blur-[120px]" />
+        <div className="absolute bottom-[0%] right-[-5%] w-[50%] h-[50%] opacity-15 bg-[radial-gradient(circle_at_center,var(--color-brand-red),transparent_70%)] blur-[100px]" />
+        <div className="absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 w-[40%] h-[40%] opacity-10 bg-[radial-gradient(circle_at_center,var(--color-brand-green),transparent_70%)] blur-[100px]" />
+      </div>
       <ScrollObserver>
         <div className="mb-16 text-center">
           <SectionTitle 

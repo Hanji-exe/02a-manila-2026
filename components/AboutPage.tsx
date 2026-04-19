@@ -52,38 +52,9 @@ export function AboutPage() {
   };
 
   return (
-    <Section id="about" className="relative bg-black border-b border-white/5 overflow-hidden min-h-screen flex items-center">
-      {/* Background Layer - Synced with HeroPage */}
+    <Section id="about" className="relative overflow-hidden min-h-screen flex items-center">
+      {/* Particles - local touch since they are randomized per page instance */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none">
-        {/* Main Atmospheric Glows */}
-        <div className="absolute top-[-10%] right-[-10%] w-[60%] h-[60%] opacity-20 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.4)_0%,transparent_70%)] blur-[100px]" />
-        <div className="absolute bottom-[0%] left-[-10%] w-[50%] h-[50%] opacity-10 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.3)_0%,transparent_70%)] blur-[80px]" />
-        <div className="absolute top-[20%] left-[20%] w-[30%] h-[30%] opacity-5 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.2)_0%,transparent_70%)] blur-[60px]" />
-
-        <div className="absolute top-[-20%] left-[-10%] w-[120%] h-[140%] opacity-[0.15] rotate-12">
-          <div
-            className="w-full h-full"
-            style={{
-              background:
-                "radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.15) 0%, transparent 70%)",
-            }}
-          />
-        </div>
-
-        <div
-          className="absolute inset-0 z-10 opacity-20"
-          style={{
-            backgroundImage: `
-              linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px),
-              linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px)
-            `,
-            backgroundSize: "80px 80px",
-            WebkitMaskImage: `radial-gradient(circle 600px at 50% 50%, white 0%, transparent 100%)`,
-            maskImage: `radial-gradient(circle 600px at 50% 50%, white 0%, transparent 100%)`,
-          }}
-        />
-
-        {/* Space-like floating particles */}
         <div className="absolute inset-0">
           {particles.map((particle) => (
             <div
@@ -105,10 +76,16 @@ export function AboutPage() {
           <div className="space-y-16">
             <div>
               <div className="mb-6 flex items-center gap-4">
-                <div className="flex gap-1">
-                  {[...Array(3)].map((_, i) => (
-                    <div key={i} className={cn("w-1.5 h-1.5 rounded-full", i === 0 ? "bg-white/40" : "bg-white/10")} />
-                  ))}
+                {/* Brand Triangle Group */}
+                <div className="flex gap-2">
+                   <div 
+                    className="w-2.5 h-2.5 bg-white shadow-[0_0_10px_rgba(255,255,255,0.3)]"
+                    style={{ clipPath: 'polygon(50% 0%, 0% 100%, 100% 100%)' }}
+                  />
+                  <div 
+                    className="w-2.5 h-2.5 bg-white/20"
+                    style={{ clipPath: 'polygon(50% 0%, 0% 100%, 100% 100%)' }}
+                  />
                 </div>
                 <span className="font-mono text-[9px] text-white/30 tracking-[0.5em] uppercase font-bold">
                   [MISSION_INTELLIGENCE]
@@ -125,7 +102,7 @@ export function AboutPage() {
                 Zero to Agent Manila
               </SectionTitle>
               <div className="flex items-center gap-4 mt-4">
-                <div className="h-px w-12 bg-white/10" />
+                <div className="h-px w-12 bg-[linear-gradient(to_right,var(--color-brand-red),var(--color-brand-green),var(--color-brand-blue))] opacity-40" />
                 <span className="text-[10px] font-mono text-white/40 tracking-[0.4em] uppercase">
                   Mission Overview
                 </span>

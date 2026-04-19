@@ -101,12 +101,6 @@ export function ScrollObserver({ children, className }: ScrollObserverProps) {
         className
       )}
     >
-      {/* Tactical Scanline Reveal */}
-      {isVisible && (
-        <div className="absolute inset-x-0 top-0 bottom-0 z-[100] pointer-events-none overflow-hidden">
-          <div className="w-full h-[2px] bg-white/60 shadow-[0_0_20px_rgba(255,255,255,0.4)] animate-[scan-down_2s_ease-out_forwards]" />
-        </div>
-      )}
       {children}
     </div>
   );

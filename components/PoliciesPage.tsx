@@ -35,9 +35,11 @@ const policies = [
 
 export function PoliciesPage() {
   return (
-    <Section id="policies" className="relative border-b border-border/50 overflow-hidden">
-      {/* Background atmospheric glows */}
-      <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] opacity-5 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.2)_0%,transparent_70%)] blur-[100px] pointer-events-none" />
+    <Section id="policies" className="relative overflow-hidden">
+      {/* RGB Atmospheric Glows */}
+      <div className="absolute top-[-5%] left-[-5%] w-[45%] h-[45%] opacity-15 bg-[radial-gradient(circle_at_center,var(--color-brand-blue),transparent_70%)] blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-[-10%] right-[-10%] w-[45%] h-[45%] opacity-15 bg-[radial-gradient(circle_at_center,var(--color-brand-red),transparent_70%)] blur-[100px] pointer-events-none" />
+      <div className="absolute top-[50%] right-[30%] w-[30%] h-[30%] opacity-10 bg-[radial-gradient(circle_at_center,var(--color-brand-green),transparent_70%)] blur-[100px] pointer-events-none" />
 
       <ScrollObserver>
         <div className="max-w-3xl mx-auto">

@@ -9,19 +9,26 @@ const navItems = [
   { label: 'About', href: '#about' },
   { label: 'Event', href: '#event-details' },
   { label: 'Team', href: '#team' },
-  { label: 'Register', href: '#get-involved' },
+  { label: 'Register Now', href: '#get-involved' },
   { label: 'Policies', href: '#policies' },
 ];
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
   const [activeItem, setActiveItem] = useState('#about');
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
-      
+
+      // Calculate scroll progress
+      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      setScrollProgress(scrolled);
+
       const sections = navItems.map(item => {
         const el = document.querySelector(item.href);
         return {
@@ -29,7 +36,7 @@ export function Navigation() {
           top: el ? el.getBoundingClientRect().top : 0
         };
       });
-      
+
       const current = sections.find(s => s.top > -150 && s.top < 300);
       if (current) setActiveItem(current.id);
     };
@@ -58,50 +65,85 @@ export function Navigation() {
   return (
     <nav
       className={cn(
-        'fixed top-0 left-0 right-0 z-50 transition-all duration-500 px-6 py-4 flex justify-center',
-        isScrolled ? 'top-2' : 'top-0'
+        'fixed top-0 left-0 right-0 z-50 transition-all duration-500 px-6 py-4 flex flex-col items-center',
+        isScrolled ? 'top-0' : 'top-0'
       )}
     >
-      <div className={cn(
-        "w-full max-w-7xl flex items-center justify-between transition-all duration-500 px-6 py-3 rounded-full border border-transparent",
-        isScrolled && "bg-black/60 backdrop-blur-xl border-white/10 shadow-2xl"
-      )}>
-        {/* Logo */}
-        <button 
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} 
-          className="flex items-center gap-2 group"
-        >
-          <span className="text-sm font-bold text-white tracking-widest uppercase hidden md:block">
-            Zero to Agent
-          </span>
-        </button>
+      {/* Scroll Progress Scanning Line */}
+      <div className="fixed top-0 left-0 w-full h-[1px] bg-white/5 z-[60]">
+        <div
+          className="h-full bg-white/40 transition-all duration-150 ease-out shadow-[0_0_10px_rgba(255,255,255,0.3)]"
+          style={{ width: `${scrollProgress}%` }}
+        />
+      </div>
 
-        {/* Centered Pill Navigation (Desktop) */}
-        <div className="hidden md:flex items-center gap-1 px-2 py-1 rounded-full bg-white/5 border border-white/5 backdrop-blur-sm">
+      <div className={cn(
+        "w-full max-w-7xl flex items-center justify-between transition-all duration-500 px-6 py-3 rounded-sm border border-transparent overflow-hidden",
+        isScrolled && "bg-black/60 backdrop-blur-xl border-white/10 shadow-[0_0_50px_rgba(0,0,0,0.5)]"
+      )}>
+        {/* Logo / Title Area */}
+        <div className="flex items-center gap-4">
+          <button
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            className="flex flex-col"
+          >
+            <span className="text-[10px] font-mono font-bold text-white tracking-[0.2em] uppercase">
+              Zero to Agent
+            </span>
+          </button>
+        </div>
+
+        {/* Centered Pill Navigation (Refined) */}
+        <div className="hidden md:flex items-center gap-1 px-1 py-1 rounded-sm bg-white/5 border border-white/5 backdrop-blur-sm relative group/nav">
+          {/* Subtle Scanline on Nav */}
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.03] to-transparent -translate-x-full group-hover/nav:animate-[shimmer_3s_infinite] pointer-events-none" />
+
           {navItems.map((item) => (
             <button
               key={item.label}
               onClick={() => handleNavClick(item.href)}
               className={cn(
-                "px-4 py-1.5 text-[11px] font-mono uppercase tracking-widest transition-all duration-300 rounded-full",
-                activeItem === item.href 
-                  ? "bg-white text-black font-bold" 
+                "px-5 py-1.5 text-[10px] font-mono uppercase tracking-[0.2em] transition-all duration-500 rounded-sm relative overflow-hidden group/btn",
+                activeItem === item.href
+                  ? "bg-white text-black font-bold shadow-[0_0_15px_rgba(255,255,255,0.3)]"
                   : "text-white/40 hover:text-white"
               )}
             >
-              {item.label}
+              {activeItem !== item.href && (
+                <div className="absolute inset-x-0 bottom-0 h-px bg-white/20 translate-y-full group-hover/btn:translate-y-0 transition-transform" />
+              )}
+              <span className="relative z-10">{item.label}</span>
             </button>
           ))}
         </div>
 
         {/* Action Buttons */}
         <div className="flex items-center gap-4">
-          <Button
+          <button
             onClick={() => window.open('https://luma.com/bho2efmh?utm_id=97758_v0_s00_e0_tv0&fbclid=IwY2xjawRQFHxleHRuA2FlbQIxMQBzcnRjBmFwcF9pZAEwAAEeBYtzdx3cSoyVWB67R5ocjH8vVv2zuhGntHEy_f1jJMFCiPud5G2LHo4gom4_aem_FYXDh08gPP2NqtKIYgjSyw', '_blank')}
-            className="hidden md:flex bg-white text-black hover:bg-black hover:text-white border border-white transition-all duration-300 rounded-full px-6 font-black text-[10px] h-8 tracking-widest uppercase"
+            className="hidden md:flex relative group px-12 py-3.5 bg-white/10 border border-white/20 hover:border-white/40 rounded-sm overflow-hidden transition-all duration-300 cursor-pointer shadow-[0_0_20px_rgba(255,255,255,0.05)] hover:shadow-[0_0_30px_rgba(255,255,255,0.15)]"
           >
-            Register Now
-          </Button>
+            {/* Pulsing Alert Background */}
+            <div className="absolute inset-0 bg-white/5 animate-pulse group-hover:bg-white/10 transition-colors" />
+            
+            {/* Continuous Orbiting Border (Simulated with rotating gradient) */}
+            <div className="absolute inset-0 z-0">
+               <div className="absolute inset-0 rounded-sm opacity-30 group-hover:opacity-100 transition-opacity">
+                 <div className="absolute inset-[-100%] bg-gradient-to-r from-transparent via-white to-transparent animate-[spin_4s_linear_infinite] opacity-20" />
+               </div>
+            </div>
+
+            {/* Scanning Shimmer */}
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full animate-[shimmer_3s_infinite] pointer-events-none" />
+            
+            <span className="relative z-10 text-white font-mono font-bold text-[11px] tracking-[0.4em] uppercase text-shadow-glow">
+              REGISTER
+            </span>
+
+            {/* Corner HUD Markers */}
+            <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-white/40 group-hover:border-white transition-colors" />
+            <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-white/40 group-hover:border-white transition-colors" />
+          </button>
 
           {/* Mobile Menu Button */}
           <button

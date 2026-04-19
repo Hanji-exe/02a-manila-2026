@@ -141,9 +141,16 @@ type TeamMember = {
 
 function TeamCard({ member, isLarge = false }: { member: TeamMember; isLarge?: boolean }) {
   return (
-    <div className={`bg-[#0a0a0a] border border-white/5 rounded-xl transition-all duration-300 hover:bg-white/[0.03] hover:border-white/40 hover:shadow-[0_0_15px_rgba(255,255,255,0.06)] flex items-center gap-6 ${isLarge ? "p-8" : "p-6"}`}>
+    <div className={`group relative bg-[#0a0a0a] border border-white/5 rounded-sm transition-all duration-300 hover:bg-white/[0.03] hover:border-white/20 hover:shadow-[0_0_30px_rgba(255,255,255,0.02)] flex items-center gap-6 overflow-hidden ${isLarge ? "p-8" : "p-6"}`}>
+      {/* Corner HUD Ornaments */}
+      <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-white/20 group-hover:border-white/40 transition-colors" />
+      <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-white/20 group-hover:border-white/40 transition-colors" />
+      
+      {/* Scanline Effect */}
+      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.02] to-transparent -translate-x-full group-hover:animate-[shimmer_2s_infinite] pointer-events-none" />
+
       {/* Large circular photo */}
-      <Avatar className="w-24 h-24 shrink-0 bg-white/10 border-2 border-white/10">
+      <Avatar className="w-24 h-24 shrink-0 bg-white/10 border border-white/10 group-hover:border-white/40 transition-colors">
         {member.photo && (
           <AvatarImage
             src={member.photo}
@@ -159,10 +166,12 @@ function TeamCard({ member, isLarge = false }: { member: TeamMember; isLarge?: b
       {/* Name, Role, Socials — stacked vertically alongside the photo */}
       <div className="flex flex-col justify-center gap-2 min-h-[96px]">
         <div>
-          <h3 className={`font-bold text-white leading-tight ${isLarge ? "text-2xl" : "text-lg"}`}>
+          <h3 className={`font-medium text-white tracking-tight leading-tight ${isLarge ? "text-2xl" : "text-lg"}`}>
             {member.name}
           </h3>
-          <p className={`${isLarge ? "text-base" : "text-sm"} text-white/40 mt-1`}>{member.role}</p>
+          <p className={`${isLarge ? "text-sm" : "text-[11px]"} text-white/40 mt-1 font-mono uppercase tracking-[0.2em]`}>
+            {member.role}
+          </p>
         </div>
 
         {/* Clickable Social Links */}
@@ -206,14 +215,31 @@ function TeamCard({ member, isLarge = false }: { member: TeamMember; isLarge?: b
 // ─── MAIN COMPONENT ─────────────────────────────────────────────
 export function TeamPage() {
   return (
-    <Section id="team" className="border-b border-border/50">
+    <Section id="team" className="relative border-b border-border/50 overflow-hidden">
+      {/* Background atmospheric glows */}
+      <div className="absolute top-[20%] right-[-10%] w-[40%] h-[40%] opacity-5 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.3)_0%,transparent_70%)] blur-[100px] pointer-events-none" />
+      <div className="absolute bottom-[10%] left-[-10%] w-[30%] h-[30%] opacity-5 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.2)_0%,transparent_70%)] blur-[80px] pointer-events-none" />
+
       <ScrollObserver>
         {/* ── ORGANIZING TEAM ── */}
         <div className="mb-20">
-          <div className="mb-12 text-center">
-            <SectionTitle className="text-4xl md:text-5xl font-bold text-white mb-2">
+          <div className="mb-16 text-center">
+            <SectionTitle 
+              className="text-4xl md:text-6xl lg:text-7xl font-sans font-medium tracking-tight text-white mb-2"
+              style={{
+                WebkitMaskImage: "linear-gradient(to bottom, white 50%, rgba(255,255,255,0.2) 100%)",
+                maskImage: "linear-gradient(to bottom, white 50%, rgba(255,255,255,0.2) 100%)",
+              }}
+            >
               Organizing Team
             </SectionTitle>
+            <div className="flex items-center justify-center gap-4 mt-4">
+              <div className="h-px w-12 bg-white/10" />
+              <span className="text-[10px] font-mono text-white/40 tracking-[0.4em] uppercase">
+                The Architects
+              </span>
+              <div className="h-px w-12 bg-white/10" />
+            </div>
           </div>
 
           {/* Directors – 2 cards, centered */}

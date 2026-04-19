@@ -34,12 +34,15 @@ export function Section({ children, className, id }: SectionProps) {
   );
 }
 
-export function SectionTitle({ children, className }: { children: ReactNode; className?: string }) {
+export function SectionTitle({ children, className, style }: { children: React.ReactNode; className?: string; style?: React.CSSProperties }) {
   return (
-    <h2 className={cn(
-      'text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4 text-balance',
-      className
-    )}>
+    <h2 
+      className={cn(
+        'text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4 text-balance',
+        className
+      )}
+      style={style}
+    >
       {children}
     </h2>
   );
@@ -93,11 +96,17 @@ export function ScrollObserver({ children, className }: ScrollObserverProps) {
     <div
       ref={ref}
       className={cn(
-        'transition-all duration-700',
-        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8',
+        'relative transition-all duration-1000 ease-out',
+        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12',
         className
       )}
     >
+      {/* Tactical Scanline Reveal */}
+      {isVisible && (
+        <div className="absolute inset-x-0 top-0 bottom-0 z-[100] pointer-events-none overflow-hidden">
+          <div className="w-full h-[2px] bg-white/60 shadow-[0_0_20px_rgba(255,255,255,0.4)] animate-[scan-down_2s_ease-out_forwards]" />
+        </div>
+      )}
       {children}
     </div>
   );

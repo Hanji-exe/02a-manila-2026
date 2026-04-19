@@ -115,14 +115,22 @@ export function AboutPage() {
                 </span>
               </div>
 
-              <SectionTitle className="text-white mb-8 tracking-tight text-2xl md:text-3xl leading-tight">
-                <span style={{
-                  WebkitMaskImage: "linear-gradient(to right, white 60%, rgba(255,255,255,0.3) 100%)",
-                  maskImage: "linear-gradient(to right, white 60%, rgba(255,255,255,0.3) 100%)",
-                }}>
-                  Zero to Agent Manila
-                </span>
+              <SectionTitle 
+                className="text-4xl md:text-6xl lg:text-7xl font-sans font-medium tracking-tight text-white mb-2"
+                style={{
+                  WebkitMaskImage: "linear-gradient(to bottom, white 50%, rgba(255,255,255,0.2) 100%)",
+                  maskImage: "linear-gradient(to bottom, white 50%, rgba(255,255,255,0.2) 100%)",
+                }}
+              >
+                Zero to Agent Manila
               </SectionTitle>
+              <div className="flex items-center gap-4 mt-4">
+                <div className="h-px w-12 bg-white/10" />
+                <span className="text-[10px] font-mono text-white/40 tracking-[0.4em] uppercase">
+                  Mission Overview
+                </span>
+                <div className="h-px w-12 bg-white/10" />
+              </div>
 
               <SectionDescription className="text-white/40 font-mono !text-[12px] md:!text-[12px] leading-relaxed tracking-wide mb-8 uppercase max-w-xl">
                 A 7-day high-performance sprint designed for the next generation of builders. 

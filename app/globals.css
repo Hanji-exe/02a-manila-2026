@@ -2,7 +2,18 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
 
+@layer base {
+  ::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 @custom-variant dark (&:is(.dark *));
+
+html, body, :root {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
 
 :root {
   --background: oklch(1 0 0);

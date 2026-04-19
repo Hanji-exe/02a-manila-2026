@@ -127,35 +127,57 @@ export function EventPage() {
   return (
     <Section id="event-details" className="border-b border-border/50">
       <ScrollObserver>
-        <div className="mb-16 ">
-          <SectionTitle className="text-4xl md:text-5xl font-bold text-white text-center mb-2">
+        <div className="mb-16 text-center">
+          <SectionTitle 
+            className="text-4xl md:text-6xl lg:text-7xl font-sans font-medium tracking-tight text-white mb-2"
+            style={{
+              WebkitMaskImage: "linear-gradient(to bottom, white 50%, rgba(255,255,255,0.2) 100%)",
+              maskImage: "linear-gradient(to bottom, white 50%, rgba(255,255,255,0.2) 100%)",
+            }}
+          >
             Event Details
           </SectionTitle>
+          <div className="flex items-center justify-center gap-4 mt-4">
+            <div className="h-px w-12 bg-white/10" />
+            <span className="text-[10px] font-mono text-white/40 tracking-[0.4em] uppercase">
+              Mission Parameters
+            </span>
+            <div className="h-px w-12 bg-white/10" />
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {eventHighlights.map((highlight) => (
             <div
               key={highlight.title}
-              className="p-8 bg-[#0a0a0a] border border-white/5 rounded-xl transition-all hover:bg-white/[0.02] flex flex-col items-start"
+              className="group relative p-8 bg-[#0a0a0a] border border-white/5 rounded-sm transition-all hover:bg-white/[0.03] hover:border-white/20 flex flex-col items-start overflow-hidden"
             >
-              <div className="mb-6">{highlight.icon}</div>
+              {/* Corner HUD Ornaments */}
+              <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-white/20 group-hover:border-white/40 transition-colors" />
+              <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-white/20 group-hover:border-white/40 transition-colors" />
+              
+              <div className="mb-6 opacity-60 group-hover:opacity-100 transition-opacity transform group-hover:scale-110 duration-500">
+                {highlight.icon}
+              </div>
 
-              <h3 className="text-xl font-bold text-white mb-6">
+              <h3 className="text-lg font-bold text-white mb-6 tracking-tight uppercase font-mono group-hover:text-white/90 transition-colors">
                 {highlight.title}
               </h3>
 
-              <ul className="space-y-4">
+              <ul className="space-y-4 w-full">
                 {highlight.items.map((item, idx) => (
                   <li
                     key={idx}
-                    className="flex items-start text-sm text-white/50 leading-relaxed font-mono tracking-tight"
+                    className="flex items-start text-[13px] text-white/50 leading-relaxed font-mono tracking-tight group-hover:text-white/70 transition-colors"
                   >
-                    <span className="mr-2 opacity-50">•</span>
+                    <span className="mr-3 text-white/20 group-hover:text-white/40 transition-colors">//</span>
                     {item}
                   </li>
                 ))}
               </ul>
+
+              {/* Hover Scanline Effect */}
+              <div className="absolute inset-0 bg-gradient-to-b from-white/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
             </div>
           ))}
         </div>

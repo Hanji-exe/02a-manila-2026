@@ -281,7 +281,7 @@ export function HeroPage() {
                   background: `radial-gradient(circle 80px at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.1), transparent)`,
                 }}
               />
-              <span className="relative z-10">Register for Manila</span>
+              <span className="relative z-10">REGISTER NOW</span>
             </a>
 
             <div className="flex flex-col items-start gap-4">

@@ -25,14 +25,14 @@ const directors = [
     name: "France Khalil",
     role: "Organization Director Head",
     initials: "FK",
-    photo: "/team/france-khalil.JPG",
+    photo: "/team/france-khalil.jpg",
     social: { twitter: "#", linkedin: "#", github: "#" },
   },
   {
     name: "Marvin Barrios",
     role: "Organization Director Head",
     initials: "MB",
-    photo: "/team/marvin-barrios.JPG",
+    photo: "/team/marvin-barrios.jpg",
     social: { twitter: "#", linkedin: "#", github: "#" },
   },
 ];
@@ -51,7 +51,7 @@ const organizers = [
     name: "Dave Aillerr Rivas",
     role: "Technical Lead",
     initials: "DR",
-    photo: "/team/dave-rivas.JPG ",
+    photo: "/team/dave-rivas.jpg",
     social: { twitter: "#", linkedin: "#", github: "#" },
   },
   // Logistics

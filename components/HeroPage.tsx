@@ -12,16 +12,26 @@ export function HeroPage() {
   const [isVisible, setIsVisible] = useState(false);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0, rawX: 0, rawY: 0 });
   const [particles, setParticles] = useState<
-    { top: string; left: string; opacity: number; delay: string }[]
+    { id: number; top: string; left: string; opacity: number; delay: string }[]
   >([]);
   const [isPulsing, setIsPulsing] = useState(false);
   const [isHoveringHologram, setIsHoveringHologram] = useState(false);
+  const [scanValue, setScanValue] = useState("0.0");
 
   useEffect(() => {
     setIsVisible(true);
 
+    // Initial scan value
+    setScanValue((Math.random() * 100).toFixed(1));
+
+    // Update scan value less frequently to prevent flickering
+    const scanInterval = setInterval(() => {
+      setScanValue((Math.random() * 100).toFixed(1));
+    }, 2000);
+
     // Generate static particles on client-side to avoid hydration mismatch
-    const newParticles = [...Array(30)].map(() => ({
+    const newParticles = [...Array(30)].map((_, i) => ({
+      id: i,
       top: `${Math.random() * 100}%`,
       left: `${Math.random() * 100}%`,
       opacity: Math.random() * 0.3,
@@ -33,10 +43,18 @@ export function HeroPage() {
       const x = (e.clientX / window.innerWidth - 0.5) * 2;
       const y = (e.clientY / window.innerHeight - 0.5) * 2;
       setMousePos({ x, y, rawX: e.clientX, rawY: e.clientY });
+
+      // Update button hover aura variables globally or via local listener
+      // For global consistency, we can update them on the document
+      document.documentElement.style.setProperty('--mouse-x', `${e.clientX}px`);
+      document.documentElement.style.setProperty('--mouse-y', `${e.clientY}px`);
     };
 
     window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      clearInterval(scanInterval);
+    };
   }, []);
 
   const triggerPulse = () => {
@@ -133,7 +151,7 @@ export function HeroPage() {
 
       {/* Custom Pointer HUD */}
       <div
-        className="fixed z-[100] pointer-events-none transition-opacity duration-300"
+        className="fixed z-100 pointer-events-none transition-opacity duration-300"
         style={{
           left: mousePos.rawX,
           top: mousePos.rawY,
@@ -144,8 +162,8 @@ export function HeroPage() {
           {/* Target Reticle */}
           <div className="w-8 h-8 border border-white/20 rounded-full" />
           <div className="absolute inset-0 flex items-center justify-center">
-            <div className="w-[1px] h-2 bg-white/40" />
-            <div className="absolute w-2 h-[1px] bg-white/40" />
+            <div className="w-px h-2 bg-white/40" />
+            <div className="absolute w-2 h-px bg-white/40" />
           </div>
 
           {/* Coordinates HUD */}
@@ -155,7 +173,7 @@ export function HeroPage() {
                 <span>X: {Math.round((mousePos.x + 1) * 500)}</span>
                 <span>Y: {Math.round((mousePos.y + 1) * 500)}</span>
                 <span className="text-white/20">
-                  AGENT_SCAN: {(Math.random() * 100).toFixed(1)}%
+                  AGENT_SCAN: {scanValue}%
                 </span>
               </div>
             </div>
@@ -195,9 +213,9 @@ export function HeroPage() {
 
         {/* Space-like floating particles */}
         <div className="absolute inset-0">
-          {particles.map((particle, i) => (
+          {particles.map((particle) => (
             <div
-              key={i}
+              key={particle.id}
               className="absolute w-[1.5px] h-[1.5px] bg-white rounded-full animate-pulse"
               style={{
                 top: particle.top,
@@ -210,7 +228,7 @@ export function HeroPage() {
         </div>
       </div>
 
-      <div className="relative z-10 w-full max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-20 py-20">
+      <div className="relative z-10 w-full max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-20 py-20 transform scale-90 transition-transform duration-700">
         {/* Left Content: Text */}
         <div
           className="flex flex-col items-start transition-transform duration-300 ease-out flex-1"
@@ -301,7 +319,7 @@ export function HeroPage() {
               className="group relative inline-block px-10 py-5 bg-white/10 text-white font-black text-xs tracking-[0.3em] uppercase rounded-full border border-white/20 backdrop-blur-xl overflow-hidden transition-all duration-300 hover:scale-105 hover:bg-white/20 hover:border-white/40 hover:shadow-[0_0_40px_rgba(255,255,255,0.15)] no-underline"
             >
               {/* Button Shimmer Effect */}
-              <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full animate-[shimmer_2s_infinite] pointer-events-none" />
+              <div className="absolute inset-0 w-full h-full bg-linear-to-r from-transparent via-white/20 to-transparent -translate-x-full animate-[shimmer_2s_infinite] pointer-events-none" />
 
               {/* Button Hover Aura */}
               <div
@@ -318,15 +336,26 @@ export function HeroPage() {
                 Powered by
               </span>
               <div className="flex items-center gap-5 group cursor-pointer">
-                <img
-                  src="/serpai-logo.svg"
-                  alt="SerpAPI"
-                  className="h-14 w-auto"
-                />
-                <div className="h-8 w-[1px] bg-white/20" />
-                <span className="text-xl font-bold text-white tracking-[0.05em]">
-                  SerpAPI
-                </span>
+                <div className="relative h-14 w-44 translate-y-1">
+                  {/* Base Logo (White) */}
+                  <img
+                    src="/serpai-logo-white.png"
+                    alt="SerpAPI"
+                    className="absolute inset-0 h-full w-auto opacity-70 group-hover:opacity-0 transition-opacity duration-300 pointer-events-none"
+                  />
+                  {/* Gradient Logo (Visible on Hover via Masking) */}
+                  <div
+                    className="absolute inset-0 h-full w-auto opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-linear-to-r from-blue-500 to-purple-500"
+                    style={{
+                      maskImage: "url('/serpai-logo-white.png')",
+                      WebkitMaskImage: "url('/serpai-logo-white.png')",
+                      maskSize: "contain",
+                      WebkitMaskSize: "contain",
+                      maskRepeat: "no-repeat",
+                      WebkitMaskRepeat: "no-repeat"
+                    }}
+                  />
+                </div>
               </div>
             </div>
           </div>
@@ -407,13 +436,13 @@ export function HeroPage() {
             </div>
 
             <div className="absolute inset-0 pointer-events-none">
-              <div className="absolute top-0 left-0 w-full h-[1px] bg-white/20 animate-[scan-down_4s_linear_infinite]" />
+              <div className="absolute top-0 left-0 w-full h-px bg-white/20 animate-[scan-down_4s_linear_infinite]" />
             </div>
 
             {/* Hover Tooltip Label */}
             <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
               <span className="text-[10px] font-mono text-white/40 tracking-[0.3em] uppercase font-bold">
-                [AGENT_SEED_V0.2]
+                [AGENT_SEED_V0.1]
               </span>
             </div>
           </div>
@@ -431,7 +460,7 @@ export function HeroPage() {
           <span className="text-[9px] font-mono text-white/30 tracking-[0.4em] uppercase">
             Scroll to Initialize
           </span>
-          <div className="w-[1px] h-12 bg-gradient-to-b from-white/40 to-transparent" />
+          <div className="w-px h-12 bg-linear-to-b from-white/40 to-transparent" />
         </div>
       </div>
     </section>

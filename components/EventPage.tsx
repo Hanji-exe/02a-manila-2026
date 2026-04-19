@@ -69,7 +69,7 @@ const featuredSpeakers = [
     role: "Speaker",
     topic: "Advanced AI Agents",
     bio: "Werald specializes in building cutting-edge autonomous agents and LLM orchestration. Catch his session as he dives deep into practical tool-use and continuous reasoning loops for actual production environments.",
-    image: "/team/werald-opolento.JPG",
+    image: "/team/werald-opolento.jpg",
   },
   {
     id: 2,

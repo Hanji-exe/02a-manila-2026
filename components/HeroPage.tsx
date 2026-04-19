@@ -10,7 +10,6 @@ import { cn } from "@/lib/utils";
  */
 export function HeroPage() {
   const [isVisible, setIsVisible] = useState(false);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0, rawX: 0, rawY: 0 });
   const [particles, setParticles] = useState<
     { id: number; top: string; left: string; opacity: number; delay: string }[]
   >([]);
@@ -39,20 +38,7 @@ export function HeroPage() {
     }));
     setParticles(newParticles);
 
-    const handleMouseMove = (e: MouseEvent) => {
-      const x = (e.clientX / window.innerWidth - 0.5) * 2;
-      const y = (e.clientY / window.innerHeight - 0.5) * 2;
-      setMousePos({ x, y, rawX: e.clientX, rawY: e.clientY });
-
-      // Update button hover aura variables globally or via local listener
-      // For global consistency, we can update them on the document
-      document.documentElement.style.setProperty('--mouse-x', `${e.clientX}px`);
-      document.documentElement.style.setProperty('--mouse-y', `${e.clientY}px`);
-    };
-
-    window.addEventListener("mousemove", handleMouseMove);
     return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
       clearInterval(scanInterval);
     };
   }, []);
@@ -65,7 +51,7 @@ export function HeroPage() {
   return (
     <section
       id="hero"
-      className="relative w-full min-h-screen bg-black flex items-center justify-center px-6 md:px-20 overflow-hidden cursor-none"
+      className="relative w-full min-h-screen bg-black flex items-center justify-center px-6 md:px-20 overflow-hidden"
     >
       <style jsx global>{`
         @keyframes glitch {
@@ -176,8 +162,8 @@ export function HeroPage() {
               linear-gradient(to bottom, rgba(255,255,255,0.1) 1px, transparent 1px)
             `,
             backgroundSize: "80px 80px",
-            WebkitMaskImage: `radial-gradient(circle 400px at ${(mousePos.x * 0.5 + 0.5) * 100}% ${(mousePos.y * 0.5 + 0.5) * 100}%, white 0%, transparent 100%)`,
-            maskImage: `radial-gradient(circle 400px at ${(mousePos.x * 0.5 + 0.5) * 100}% ${(mousePos.y * 0.5 + 0.5) * 100}%, white 0%, transparent 100%)`,
+            WebkitMaskImage: `radial-gradient(circle 400px at 50% 50%, white 0%, transparent 100%)`,
+            maskImage: `radial-gradient(circle 400px at 50% 50%, white 0%, transparent 100%)`,
           }}
         />
 
@@ -202,9 +188,6 @@ export function HeroPage() {
         {/* Left Content: Text */}
         <div
           className="flex flex-col items-start transition-transform duration-300 ease-out flex-1"
-          style={{
-            transform: `translate(${mousePos.x * -10}px, ${mousePos.y * -10}px)`,
-          }}
         >
           {/* Top Logos */}
           <div
@@ -343,12 +326,9 @@ export function HeroPage() {
           <div
             onClick={triggerPulse}
             className={cn(
-              "relative w-72 h-72 md:w-96 md:h-96 preserve-3d cursor-none group transition-transform duration-500 ease-out animate-float",
+              "relative w-72 h-72 md:w-96 md:h-96 preserve-3d group transition-transform duration-500 ease-out animate-float",
               isPulsing && "scale-110",
             )}
-            style={{
-              transform: `rotateY(${mousePos.x * 20}deg) rotateX(${mousePos.y * -20}deg)`,
-            }}
           >
             {/* Outer HUD Rings */}
             <div className="absolute inset-0 border border-white/10 rounded-full animate-[spin_10s_linear_infinite] preserve-3d" />

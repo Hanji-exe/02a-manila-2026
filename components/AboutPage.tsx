@@ -10,14 +10,19 @@ import {
 } from "./Layout";
 
 export function AboutPage() {
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [isVisible, setIsVisible] = useState(false);
+  const [currentTime, setCurrentTime] = useState<Date | null>(null);
   const [particles, setParticles] = useState<
     { id: number; top: string; left: string; opacity: number; delay: string }[]
   >([]);
 
   useEffect(() => {
     setIsVisible(true);
+    setCurrentTime(new Date());
+
+    const timer = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 1000);
     
     // Sync particles from HeroPage logic
     const newParticles = [...Array(20)].map((_, i) => ({
@@ -29,15 +34,22 @@ export function AboutPage() {
     }));
     setParticles(newParticles);
 
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePos({
-        x: (e.clientX / window.innerWidth - 0.5) * 2,
-        y: (e.clientY / window.innerHeight - 0.5) * 2,
-      });
-    };
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
+    return () => clearInterval(timer);
   }, []);
+
+  // Format time for the HUD
+  const formatHUDTime = (date: Date | null) => {
+    if (!date) return "";
+    return date.toLocaleString("en-US", {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+      hour12: true,
+    }).replace(",", "");
+  };
 
   return (
     <Section id="about" className="relative bg-black border-b border-white/5 overflow-hidden min-h-screen flex items-center">
@@ -66,8 +78,8 @@ export function AboutPage() {
               linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px)
             `,
             backgroundSize: "80px 80px",
-            WebkitMaskImage: `radial-gradient(circle 600px at ${(mousePos.x * 0.5 + 0.5) * 100}% ${(mousePos.y * 0.5 + 0.5) * 100}%, white 0%, transparent 100%)`,
-            maskImage: `radial-gradient(circle 600px at ${(mousePos.x * 0.5 + 0.5) * 100}% ${(mousePos.y * 0.5 + 0.5) * 100}%, white 0%, transparent 100%)`,
+            WebkitMaskImage: `radial-gradient(circle 600px at 50% 50%, white 0%, transparent 100%)`,
+            maskImage: `radial-gradient(circle 600px at 50% 50%, white 0%, transparent 100%)`,
           }}
         />
 
@@ -174,72 +186,65 @@ export function AboutPage() {
             </div>
           </div>
 
-          {/* Strategic Map Container - Centered Vertically by Grid items-center */}
-          <div className="relative w-full h-[520px] bg-white/[0.01] border border-white/5 rounded-sm overflow-hidden group self-center">
-            <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3861.926454278326!2d121.01637090000001!3d14.5461983!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397c9005caf9fb5%3A0xcad0a9eb23cd7497!2sLEAP%20Studios!5e0!3m2!1sen!2sph!4v1776506706877!5m2!1sen!2sph"
-                width="100%"
-                height="100%"
-                style={{ border: 0, filter: "grayscale(0.6) contrast(1.1) brightness(0.8)" }}
-                allowFullScreen={true}
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                className="absolute inset-0 opacity-60 group-hover:opacity-100 group-hover:filter-none transition-all duration-1000"
-              ></iframe>
+          {/* Strategic Map Container */}
+          <div className="relative w-full space-y-4 self-center">
+            <div className="relative w-full h-[520px] bg-white/[0.01] border border-white/5 rounded-sm overflow-hidden group">
+              <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3861.926454278326!2d121.01637090000001!3d14.5461983!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397c9005caf9fb5%3A0xcad0a9eb23cd7497!2sLEAP%20Studios!5e0!3m2!1sen!2sph!4v1776506706877!5m2!1sen!2sph"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0, filter: "grayscale(0.6) contrast(1.1) brightness(0.8)" }}
+                  allowFullScreen={true}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  className="absolute inset-0 opacity-60 group-hover:opacity-100 group-hover:filter-none transition-all duration-1000"
+                ></iframe>
 
-              {/* Tactical Overlay */}
-              <div className="absolute inset-0 pointer-events-none">
-                <div className="absolute inset-0 opacity-[0.03] bg-[radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)] [background-size:20px_20px]" />
+                {/* Tactical Overlay (Internal) */}
+                <div className="absolute inset-0 pointer-events-none">
+                  <div className="absolute inset-0 opacity-[0.03] bg-[radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)] [background-size:20px_20px]" />
 
-                {/* Central Target Reticle */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="relative">
-                    <div className="absolute inset-0 w-16 h-16 -translate-x-1/2 -translate-y-1/2 border border-white/10 rounded-full animate-[ping_4s_linear_infinite]" />
-                    <div className="w-3 h-3 -translate-x-1/2 -translate-y-1/2 border border-white rounded-full bg-white/10" />
-                    <div className="absolute top-[-10px] left-[-0.5px] w-[1px] h-2 bg-white/40" />
-                    <div className="absolute bottom-[-10px] left-[-0.5px] w-[1px] h-2 bg-white/40" />
-                    <div className="absolute left-[-10px] top-[-0.5px] w-2 h-[1px] bg-white/40" />
-                    <div className="absolute right-[-10px] top-[-0.5px] w-2 h-[1px] bg-white/40" />
+                  {/* Central Target Reticle */}
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="relative">
+                      <div className="absolute inset-0 w-16 h-16 -translate-x-1/2 -translate-y-1/2 border border-white/10 rounded-full animate-[ping_4s_linear_infinite]" />
+                      <div className="w-3 h-3 -translate-x-1/2 -translate-y-1/2 border border-white rounded-full bg-white/10" />
+                      <div className="absolute top-[-10px] left-[-0.5px] w-[1px] h-2 bg-white/40" />
+                      <div className="absolute bottom-[-10px] left-[-0.5px] w-[1px] h-2 bg-white/40" />
+                      <div className="absolute left-[-10px] top-[-0.5px] w-2 h-[1px] bg-white/40" />
+                      <div className="absolute right-[-10px] top-[-0.5px] w-2 h-[1px] bg-white/40" />
+                    </div>
+                  </div>
+
+                  {/* Minimalist Brackets */}
+                  <div className="absolute top-4 left-4 w-6 h-6 border-t border-l border-white/10" />
+                  <div className="absolute top-4 right-4 w-6 h-6 border-t border-r border-white/10" />
+                  <div className="absolute bottom-4 left-4 w-6 h-6 border-b border-l border-white/10" />
+                  <div className="absolute bottom-4 right-4 w-6 h-6 border-b border-r border-white/10" />
+
+                  {/* Slow Scanline */}
+                  <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-10">
+                    <div className="w-full h-px bg-white/40 absolute animate-[scan-down_12s_linear_infinite]" />
                   </div>
                 </div>
+            </div>
 
-                {/* Side Data Stream */}
-                <div className="absolute top-10 right-6 flex flex-col items-end gap-1.5 font-mono text-[8px] text-white/20 uppercase tracking-widest">
-                  <div className="flex items-center gap-2">
-                    <span>METRO_BGC // ACTIVE</span>
-                    <div className="w-1 h-1 rounded-full bg-blue-500/40" />
-                  </div>
-                  <div>NODE_SYNC // 02A_MNL</div>
-                  <div>AUTH_AGENT // V0.1</div>
+            {/* Minimalist Status Indicator */}
+            <div className="flex items-center gap-3 px-1 py-1 font-mono uppercase">
+              <div className="flex items-center gap-2">
+                <div className="relative flex h-2 w-2">
+                  <div className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></div>
+                  <div className="relative inline-flex rounded-full h-2 w-2 bg-red-500 shadow-[0_0_10px_rgba(239,68,68,0.8)]"></div>
                 </div>
-
-                {/* Status HUD */}
-                <div className="absolute bottom-8 left-20 flex items-center gap-3">
-                  <div className="w-1 h-1 rounded-full bg-red-500 animate-pulse" />
-                  <span className="font-mono text-[9px] text-white/60 tracking-[0.3em] uppercase transition-opacity group-hover:opacity-100 opacity-40">
-                    LIVE_FEED // EST_DATA
-                  </span>
-                </div>
-
-                {/* Location Label */}
-                <div className="absolute bottom-8 right-8 p-4 bg-black/60 backdrop-blur-xl border border-white/5 rounded-sm font-mono text-[9px] text-white/30">
-                  <div className="flex flex-col gap-0.5">
-                    <span className="text-white/60 font-bold tracking-widest">[STRATEGIC_COORD]</span>
-                    <span className="lowercase">leap studios, manila</span>
-                  </div>
-                </div>
-
-                {/* Minimalist Brackets */}
-                <div className="absolute top-4 left-4 w-6 h-6 border-t border-l border-white/10" />
-                <div className="absolute top-4 right-4 w-6 h-6 border-t border-r border-white/10" />
-                <div className="absolute bottom-4 left-4 w-6 h-6 border-b border-l border-white/10" />
-                <div className="absolute bottom-4 right-4 w-6 h-6 border-b border-r border-white/10" />
-
-                {/* Slow Scanline */}
-                <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-10">
-                  <div className="w-full h-px bg-white/40 absolute animate-[scan-down_12s_linear_infinite]" />
-                </div>
+                <span className="text-[10px] text-white tracking-[0.3em] font-bold">
+                  Live
+                </span>
               </div>
+              <div className="w-px h-3 bg-white/30" />
+              <span className="text-[10px] text-white/70 tracking-[0.2em] font-medium">
+                {formatHUDTime(currentTime)}
+              </span>
+            </div>
           </div>
         </div>
       </ScrollObserver>

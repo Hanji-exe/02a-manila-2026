@@ -149,37 +149,7 @@ export function HeroPage() {
         }
       `}</style>
 
-      {/* Custom Pointer HUD */}
-      <div
-        className="fixed z-100 pointer-events-none transition-opacity duration-300"
-        style={{
-          left: mousePos.rawX,
-          top: mousePos.rawY,
-          opacity: isVisible ? 1 : 0,
-        }}
-      >
-        <div className="relative -translate-x-1/2 -translate-y-1/2">
-          {/* Target Reticle */}
-          <div className="w-8 h-8 border border-white/20 rounded-full" />
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="w-px h-2 bg-white/40" />
-            <div className="absolute w-2 h-px bg-white/40" />
-          </div>
-
-          {/* Coordinates HUD */}
-          {isHoveringHologram && (
-            <div className="absolute top-6 left-6 font-mono text-[9px] text-white/60 bg-black/40 backdrop-blur-sm p-2 border border-white/10 rounded overflow-hidden animate-in fade-in zoom-in duration-200">
-              <div className="flex flex-col gap-1">
-                <span>X: {Math.round((mousePos.x + 1) * 500)}</span>
-                <span>Y: {Math.round((mousePos.y + 1) * 500)}</span>
-                <span className="text-white/20">
-                  AGENT_SCAN: {scanValue}%
-                </span>
-              </div>
-            </div>
-          )}
-        </div>
-      </div>
+      {/* Pointer HUD Removed - Now Global */}
 
       {/* Background Layer */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none">

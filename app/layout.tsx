@@ -38,6 +38,7 @@ export const metadata: Metadata = {
 
 import { Navigation } from '@/components/navigation'
 import { Footer } from '@/components/footer'
+import { PointerHUD } from '@/components/PointerHUD'
 
 export default function RootLayout({
   children,
@@ -46,7 +47,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark bg-background">
-      <body className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased`}>
+      <body className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased cursor-none`}>
+        <PointerHUD />
         <Navigation />
         {children}
         <Footer />

@@ -34,7 +34,7 @@ const directors = [
     role: "Organization Director Head",
     initials: "MB",
     photo: "/team/marvin-barrios.PNG",
-    social: { linkedin: "https://www.linkedin.com/in/marvinbarrios/", github: "#" },
+    social: { linkedin: "https://www.linkedin.com/in/marvinbarrios/" },
   },
 ];
 
@@ -96,8 +96,8 @@ const organizers = [
     name: "Lanz Kristoffer G. Mañalac",
     role: "Registration Officer",
     initials: "LM",
-    photo: "/team/lanz-manalac.jpg",
-    social: { linkedin: "#", github: "#" },
+    photo: "/team/lanz-manalac.JPG",
+    social: { linkedin: "https://ph.linkedin.com/in/lanz-kristoffer-ma%C3%B1alac-b485b3327", github: "https://github.com/lanzmanalac" },
   },
   // Media, Marketing & External
   {
@@ -153,7 +153,7 @@ function TeamCard({ member, isLarge = false }: { member: TeamMember; isLarge?: b
       {/* Corner HUD Ornaments */}
       <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-white/20 group-hover:border-white/40 transition-colors" />
       <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-white/20 group-hover:border-white/40 transition-colors" />
-      
+
       {/* Scanline Effect */}
       <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.02] to-transparent -translate-x-full group-hover:animate-[shimmer_2s_infinite] pointer-events-none" />
 
@@ -254,7 +254,7 @@ export function TeamPage() {
         {/* ── ORGANIZING TEAM ── */}
         <div className="mb-20">
           <div className="mb-16 text-center">
-            <SectionTitle 
+            <SectionTitle
               className="text-4xl md:text-6xl lg:text-7xl font-sans font-medium tracking-tight text-white mb-2"
               style={{
                 WebkitMaskImage: "linear-gradient(to bottom, white 50%, rgba(255,255,255,0.2) 100%)",

@@ -5,20 +5,6 @@ import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Github, Linkedin } from "lucide-react";
 import { Section, SectionTitle, ScrollObserver } from "./Layout";
 
-/**
- * TeamPage Component
- *
- * Structure:
- *   - Organization Directors (2 cards, centered top row)
- *   - Organizing Team grouped by role (3 per row)
- *   - Speakers (separate section, 2 cards centered)
- *
- * HOW TO ADD PHOTOS:
- * 1. Place your team photos in:  public/team/
- * 2. Name each file to match the "photo" field below, e.g. "france-khalil.jpg"
- * 3. Supported formats: .jpg, .png, .webp
- * 4. Recommended size: 400x400px (square crop works best for the circle)
- */
 
 // ─── ORGANIZATION DIRECTORS ─────────────────────────────────────
 const directors = [
@@ -43,14 +29,14 @@ const organizers = [
   // Technical
   {
     name: "Lawrence Panes",
-    role: "Technical Lead",
+    role: "Technical Head",
     initials: "LP",
     photo: "/team/lawrence-panes.JPG",
     social: { linkedin: "https://www.linkedin.com/in/lawrencepanes/", github: "https://github.com/lauurnce" },
   },
   {
     name: "Dave Aillerr Rivas",
-    role: "Technical Lead",
+    role: "Technical Head",
     initials: "DR",
     photo: "/team/dave-rivas.jpg",
     social: { linkedin: "https://www.linkedin.com/in/dave-aillerr-rivas/", github: "https://github.com/daveaillerr" },
@@ -58,7 +44,7 @@ const organizers = [
   // Logistics
   {
     name: "Fahad Hadji Esmael",
-    role: "Logistics Lead",
+    role: "Logistics Head",
     initials: "FE",
     photo: "/team/fahad-esmael.JPG",
     social: { linkedin: "https://www.linkedin.com/in/fahad-hadji-esmael-15322b31b/", github: "https://github.com/Hanji-exe" },
@@ -90,7 +76,7 @@ const organizers = [
     role: "Registration Head",
     initials: "MN",
     photo: "/team/mary-jean-navarro.png",
-    social: { linkedin: "#", github: "#" },
+    social: { linkedin: "https://www.linkedin.com/in/goingmeri/", github: "https://github.com/goingmeri" },
   },
   {
     name: "Lanz Kristoffer G. Mañalac",
@@ -119,7 +105,7 @@ const organizers = [
     role: "External Head",
     initials: "WP",
     photo: "/team/will-parrone.jpeg",
-    social: { linkedin: "#", github: "#" },
+    social: { linkedin: "https://www.linkedin.com/in/will-vincent-parrone-8763311ba/", github: "https://github.com/KyahWill" },
   },
   // Emcees / Hosts
   {
@@ -138,14 +124,6 @@ const organizers = [
   },
 ];
 
-// ─── REUSABLE CARD COMPONENT ────────────────────────────────────
-type TeamMember = {
-  name: string;
-  role: string;
-  initials: string;
-  photo: string;
-  social: { linkedin: string; github?: string };
-};
 
 function TeamCard({ member, isLarge = false }: { member: TeamMember; isLarge?: boolean }) {
   return (

@@ -80,7 +80,7 @@ export function AboutPage() {
           {particles.map((particle) => (
             <div
               key={particle.id}
-              className="absolute w-[1px] h-[1px] bg-white rounded-full animate-pulse"
+              className="absolute w-px h-px bg-white rounded-full animate-pulse"
               style={{
                 top: particle.top,
                 left: particle.left,
@@ -126,7 +126,7 @@ export function AboutPage() {
                 </span>
               </SectionTitle>
 
-              <SectionDescription className="text-white/40 font-mono !text-[12px] md:!text-[12px] leading-relaxed tracking-wide mb-8 uppercase max-w-xl">
+              <SectionDescription className="text-white/40 font-mono text-[12px]! md:text-[12px]! leading-relaxed tracking-wide mb-8 uppercase max-w-xl">
                 {ABOUT.missionDescription}
               </SectionDescription>
             </div>
@@ -135,7 +135,7 @@ export function AboutPage() {
               {ABOUT.stats.map((item, i) => (
                 <div
                   key={i}
-                  className="group relative p-5 bg-white/[0.01] border border-white/5 rounded-sm hover:bg-white/[0.03] hover:border-white/10 transition-all duration-500"
+                  className="group relative p-5 bg-white/1 border border-white/5 rounded-sm hover:bg-white/3 hover:border-white/10 transition-all duration-500"
                 >
                   <div className="flex justify-between items-start mb-2">
                     <span className="font-mono text-[9px] text-white/20 tracking-widest">
@@ -166,7 +166,7 @@ export function AboutPage() {
                   </div>
 
                   {/* Minimalist Scanning Line */}
-                  <div className="absolute bottom-0 left-0 w-full h-[1px] bg-white/5 overflow-hidden">
+                  <div className="absolute bottom-0 left-0 w-full h-px bg-white/5 overflow-hidden">
                     <div className="w-1/3 h-full bg-white/20 -translate-x-full group-hover:translate-x-[300%] transition-transform duration-1000 ease-in-out" />
                   </div>
                 </div>
@@ -175,7 +175,7 @@ export function AboutPage() {
           </div>
 
           {/* Strategic Map Container - Centered Vertically by Grid items-center */}
-          <div className="relative w-full h-[520px] bg-white/[0.01] border border-white/5 rounded-sm overflow-hidden group self-center">
+          <div className="relative w-full h-[520px] bg-white/1 border border-white/5 rounded-sm overflow-hidden group self-center">
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3861.926454278326!2d121.01637090000001!3d14.5461983!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397c9005caf9fb5%3A0xcad0a9eb23cd7497!2sLEAP%20Studios!5e0!3m2!1sen!2sph!4v1776506706877!5m2!1sen!2sph"
               width="100%"
@@ -192,17 +192,17 @@ export function AboutPage() {
 
             {/* Tactical Overlay */}
             <div className="absolute inset-0 pointer-events-none">
-              <div className="absolute inset-0 opacity-[0.03] bg-[radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)] [background-size:20px_20px]" />
+              <div className="absolute inset-0 opacity-[0.03] bg-[radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)] bg-size-[20px_20px]" />
 
               {/* Central Target Reticle */}
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="relative">
                   <div className="absolute inset-0 w-16 h-16 -translate-x-1/2 -translate-y-1/2 border border-white/10 rounded-full animate-[ping_4s_linear_infinite]" />
                   <div className="w-3 h-3 -translate-x-1/2 -translate-y-1/2 border border-white rounded-full bg-white/10" />
-                  <div className="absolute top-[-10px] left-[-0.5px] w-[1px] h-2 bg-white/40" />
-                  <div className="absolute bottom-[-10px] left-[-0.5px] w-[1px] h-2 bg-white/40" />
-                  <div className="absolute left-[-10px] top-[-0.5px] w-2 h-[1px] bg-white/40" />
-                  <div className="absolute right-[-10px] top-[-0.5px] w-2 h-[1px] bg-white/40" />
+                  <div className="absolute top-[-10px] left-[-0.5px] w-px h-2 bg-white/40" />
+                  <div className="absolute bottom-[-10px] left-[-0.5px] w-px h-2 bg-white/40" />
+                  <div className="absolute left-[-10px] top-[-0.5px] w-2 h-px bg-white/40" />
+                  <div className="absolute right-[-10px] top-[-0.5px] w-2 h-px bg-white/40" />
                 </div>
               </div>
 

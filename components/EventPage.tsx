@@ -110,7 +110,7 @@ export function EventPage() {
           {eventHighlights.map((highlight) => (
             <div
               key={highlight.title}
-              className="group relative p-8 bg-[#0a0a0a] border border-white/5 rounded-sm transition-all hover:bg-white/[0.03] hover:border-white/20 flex flex-col items-start overflow-hidden"
+              className="group relative p-8 bg-[#0a0a0a] border border-white/5 rounded-sm transition-all hover:bg-white/3 hover:border-white/20 flex flex-col items-start overflow-hidden"
             >
               {/* Corner HUD Ornaments */}
               <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-white/20 group-hover:border-white/40 transition-colors" />
@@ -139,7 +139,7 @@ export function EventPage() {
               </ul>
 
               {/* Hover Scanline Effect */}
-              <div className="absolute inset-0 bg-gradient-to-b from-white/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+              <div className="absolute inset-0 bg-linear-to-b from-white/2 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
             </div>
           ))}
         </div>
@@ -197,8 +197,8 @@ export function EventPage() {
 
               {/* Tag/Topic Area (Locked Height) */}
               <div className="h-10 flex items-center gap-4 mb-6">
-                <div className="px-3 py-1 border border-white/10 bg-white/5 rounded-sm text-[10px] font-mono text-white/50 tracking-widest uppercase relative overflow-hidden group">
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:animate-shimmer-fast" />
+                <div className="px-3 py-1 border border-white/10 bg-white/5 rounded-sm text-[10px] font-mono text-white/50 tracking-widest uppercase relative overflow-hidden group shrink-0 whitespace-nowrap">
+                  <div className="absolute inset-0 bg-linear-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:animate-shimmer-fast" />
                   <span className="relative">
                     {featuredSpeakers[currentSpeaker].role}
                   </span>
@@ -221,9 +221,9 @@ export function EventPage() {
                 <div className="flex items-center gap-3">
                   <button
                     onClick={prevSpeaker}
-                    className="group relative flex items-center gap-3 px-6 py-3 border border-white/10 hover:border-white/20 bg-white/[0.02] hover:bg-white/[0.05] transition-all duration-300 rounded-sm overflow-hidden w-36 justify-center"
+                    className="group relative flex items-center gap-3 px-6 py-3 border border-white/10 hover:border-white/20 bg-white/2 hover:bg-white/5 transition-all duration-300 rounded-sm overflow-hidden w-36 justify-center"
                   >
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:animate-shimmer-fast" />
+                    <div className="absolute inset-0 bg-linear-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:animate-shimmer-fast" />
                     <ChevronLeft className="w-4 h-4 text-white/40 group-hover:text-white transition-colors relative z-10" />
                     <span className="text-[9px] font-mono text-white/40 group-hover:text-white/80 tracking-[0.2em] uppercase relative z-10">
                       PREV
@@ -233,7 +233,7 @@ export function EventPage() {
                     onClick={nextSpeaker}
                     className="group relative flex items-center gap-3 px-10 py-3 bg-white hover:bg-white/90 transition-all duration-300 rounded-sm overflow-hidden w-36 justify-center"
                   >
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-black/10 to-transparent -translate-x-full group-hover:animate-shimmer-fast" />
+                    <div className="absolute inset-0 bg-linear-to-r from-transparent via-black/10 to-transparent -translate-x-full group-hover:animate-shimmer-fast" />
                     <span className="text-[9px] font-mono text-black tracking-[0.2em] uppercase relative z-10 font-bold">
                       NEXT
                     </span>

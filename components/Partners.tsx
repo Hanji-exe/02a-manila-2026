@@ -89,6 +89,23 @@ export function Partners() {
                 </span>
               </div>
             </div>
+
+            {/* Swarm */}
+            <div className="flex flex-col items-center gap-6 group">
+              <div className="h-32 md:h-48 flex items-center justify-center transition-transform duration-500 group-hover:scale-110">
+                <img
+                  src="/Swarm.png"
+                  alt="Swarm"
+                  className="h-full w-auto max-w-[130px] object-contain"
+                />
+              </div>
+              <div className="flex flex-col items-center gap-3">
+                <div className="w-12 h-px bg-white/10 group-hover:w-20 transition-all duration-500" />
+                <span className="text-[10px] font-mono text-white/30 tracking-[0.6em] uppercase">
+                  Ecosystem Partner
+                </span>
+              </div>
+            </div>
           </div>
 
           {/* ── COMMUNITY PARTNERS DIVIDER ── */}

@@ -55,10 +55,32 @@ export function Partners() {
           </div>
 
           {/* ── SPONSORS TIER ── */}
-          <div className="flex flex-col md:flex-row items-center justify-center gap-16 md:gap-32 mb-24">
+          <div className="flex flex-col md:flex-row items-end justify-center gap-16 md:gap-32 mb-24">
+            {/* Swarm */}
+            <div className="flex flex-col items-center gap-6 group">
+              <div className="flex flex-col items-center gap-3">
+                <div className="h-24 md:h-32 flex items-center justify-center transition-transform duration-500 group-hover:scale-110">
+                  <img
+                    src="/Swarm.png"
+                    alt="Swarm"
+                    className="h-full w-auto max-w-[110px] object-contain"
+                  />
+                </div>
+                <span className="text-xl md:text-2xl font-bold text-white tracking-[0.2em] uppercase">
+                  Swarm
+                </span>
+              </div>
+              <div className="flex flex-col items-center gap-3">
+                <div className="w-12 h-px bg-white/10 group-hover:w-20 transition-all duration-500" />
+                <span className="text-[10px] font-mono text-white/30 tracking-[0.6em] uppercase">
+                  Sponsor
+                </span>
+              </div>
+            </div>
+
             {/* SerpAPI */}
             <div className="flex flex-col items-center gap-6 group">
-              <div className="h-32 md:h-48 flex items-center justify-center transition-transform duration-500 group-hover:scale-110">
+              <div className="h-24 md:h-32 flex items-center justify-center transition-transform duration-500 group-hover:scale-110 mb-3">
                 <img
                   src="/serpapi-logo-white.png"
                   alt="SerpAPI"
@@ -75,7 +97,7 @@ export function Partners() {
 
             {/* Leap Studios */}
             <div className="flex flex-col items-center gap-6 group">
-              <div className="h-32 md:h-48 flex items-center justify-center transition-transform duration-500 group-hover:scale-110">
+              <div className="h-24 md:h-32 flex items-center justify-center transition-transform duration-500 group-hover:scale-110 mb-3">
                 <img
                   src="/leap_studios.svg"
                   alt="Leap Studios"

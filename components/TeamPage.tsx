@@ -3,7 +3,20 @@
 import { useEffect, useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Github, Linkedin } from "lucide-react";
+import { cn } from "@/lib/utils";
 import { Section, SectionTitle, ScrollObserver } from "./Layout";
+
+interface TeamMember {
+  name: string;
+  role: string;
+  initials: string;
+  photo: string;
+  social: {
+    linkedin?: string;
+    github?: string;
+  };
+  photoStyles?: string;
+}
 
 
 // ─── ORGANIZATION DIRECTORS ─────────────────────────────────────
@@ -48,6 +61,7 @@ const organizers = [
     initials: "FE",
     photo: "/team/fahad-esmael.JPG",
     social: { linkedin: "https://www.linkedin.com/in/fahad-hadji-esmael-15322b31b/", github: "https://github.com/Hanji-exe" },
+    photoStyles: "scale-[1.3] object-[center_45%]",
   },
   {
     name: "Alpie Obas",
@@ -134,13 +148,13 @@ const organizers = [
 
 function TeamCard({ member, isLarge = false }: { member: TeamMember; isLarge?: boolean }) {
   return (
-    <div className={`group relative bg-[#0a0a0a] border border-white/5 rounded-sm transition-all duration-300 hover:bg-white/[0.03] hover:border-white/20 hover:shadow-[0_0_30px_rgba(255,255,255,0.02)] flex items-center gap-6 overflow-hidden ${isLarge ? "p-8" : "p-6"}`}>
+    <div className={`group relative bg-[#0a0a0a] border border-white/5 rounded-sm transition-all duration-300 hover:bg-white/3 hover:border-white/20 hover:shadow-[0_0_30px_rgba(255,255,255,0.02)] flex items-center gap-6 overflow-hidden ${isLarge ? "p-8" : "p-6"}`}>
       {/* Corner HUD Ornaments */}
       <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-white/20 group-hover:border-white/40 transition-colors" />
       <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-white/20 group-hover:border-white/40 transition-colors" />
 
       {/* Scanline Effect */}
-      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.02] to-transparent -translate-x-full group-hover:animate-[shimmer_2s_infinite] pointer-events-none" />
+      <div className="absolute inset-0 bg-linear-to-r from-transparent via-white/2 to-transparent -translate-x-full group-hover:animate-[shimmer_2s_infinite] pointer-events-none" />
 
       {/* Large circular photo */}
       <Avatar className="w-24 h-24 shrink-0 bg-white/10 border border-white/10 group-hover:border-white/40 transition-colors">
@@ -148,7 +162,7 @@ function TeamCard({ member, isLarge = false }: { member: TeamMember; isLarge?: b
           <AvatarImage
             src={member.photo}
             alt={member.name}
-            className="object-cover"
+            className={cn("object-cover", member.photoStyles)}
           />
         )}
         <AvatarFallback className="text-white font-bold text-xl">
